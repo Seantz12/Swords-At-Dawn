@@ -1,3 +1,10 @@
+require('assets.background');
+require('assets.constants');
+
+function love.load()
+    love.graphics.setBackgroundColor(1, 153/255, 0);
+end
+
 function love.draw()
-    love.graphics.rectangle("fill", 100, 100, 100, 100);
+    drawBackground();
 end
