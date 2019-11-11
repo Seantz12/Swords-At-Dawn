@@ -1,4 +1,4 @@
-require('assets.constants');
+require("assets.constants");
 
 function drawBackground()
     love.graphics.setColor(0, 0, 0);
