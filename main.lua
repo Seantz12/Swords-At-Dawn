@@ -14,6 +14,8 @@ function love.update(dt)
         p1:move("right");
     elseif love.keyboard.isDown('a') then
         p1:move("left");
+    elseif love.keyboard.isDown('r') then
+        p1:attack();
     end
 end
 
