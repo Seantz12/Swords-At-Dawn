@@ -35,6 +35,10 @@ local swordAttack = function(self)
     self.active = true;
 end
 
+local swordReset = function(self)
+    self.active = false;
+end
+
 function newSword(player, opponent)
     local sword = {
         x = player.x + PLAYER_WIDTH + swordWidth * SWORD_SCALE_FACTOR,
@@ -42,7 +46,8 @@ function newSword(player, opponent)
         opponent = opponent, -- for collision purposes
         draw = drawSword,
         attack = swordAttack,
-        active = false -- being active means it can hurt
+        active = false, -- being active means it can hurt
+        reset = swordReset
     };
     return sword;
 end

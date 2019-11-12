@@ -29,6 +29,11 @@ local playerAttack = function(self)
     self.attacking = true;
 end
 
+local playerReset = function(self)
+    self.attacking = false;
+    self.sword:reset();
+end
+
 function newPlayer()
     local Player = {
         x = 30,
@@ -36,7 +41,8 @@ function newPlayer()
         draw = playerDraw,
         move = playerMove,
         attacking = false,
-        attack = playerAttack
+        attack = playerAttack,
+        reset = playerReset
     };
     local sword = newSword(Player, nil);
     Player.sword = sword;
