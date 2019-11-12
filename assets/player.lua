@@ -25,13 +25,19 @@ local playerMove = function(self, direction)
 end
 
 local playerAttack = function(self)
-    self.sword:attack();
     self.attacking = true;
+end
+
+local playerActiveAttack = function(self)
+    self.sword:attack();
+end
+
+local playerInactiveAttack = function(self)
+    self.sword:reset();
 end
 
 local playerReset = function(self)
     self.attacking = false;
-    self.sword:reset();
 end
 
 function newPlayer()
@@ -42,6 +48,9 @@ function newPlayer()
         move = playerMove,
         attacking = false,
         attack = playerAttack,
+        attackStartTime = 0,
+        activeAttack = playerActiveAttack,
+        inactiveAttack = playerInactiveAttack,
         reset = playerReset
     };
     local sword = newSword(Player, nil);
