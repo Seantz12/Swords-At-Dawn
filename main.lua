@@ -4,9 +4,20 @@ require("assets.player")
 
 local p1;
 
+local test_dummy = {
+    x = WINDOW_WIDTH-30,
+    y = WINDOW_HEIGHT-150,
+    width = PLAYER_WIDTH,
+    height = PLAYER_HEIGHT,
+    draw = function (self)
+        love.graphics.rectangle("fill", self.x, self.y, self.width, self.height);
+    end
+}
+
 function love.load()
     love.graphics.setBackgroundColor(1, 153/255, 0);
     p1 = newPlayer();
+    p1:attachSwordOpponent(test_dummy);
 end
 
 function handlePlayerInput(player)
@@ -38,4 +49,5 @@ end
 function love.draw()
     drawBackground();
     p1:draw();
+    test_dummy:draw();
 end

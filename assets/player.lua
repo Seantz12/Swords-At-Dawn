@@ -40,6 +40,10 @@ local playerReset = function(self)
     self.attacking = false;
 end
 
+local playerAttachSwordOpponent = function(self, opponent)
+    self.sword:attachOpponent(opponent)
+end
+
 function newPlayer()
     local Player = {
         x = 30,
@@ -51,9 +55,10 @@ function newPlayer()
         attackStartTime = 0,
         activeAttack = playerActiveAttack,
         inactiveAttack = playerInactiveAttack,
+        attachSwordOpponent = playerAttachSwordOpponent,
         reset = playerReset
     };
-    local sword = newSword(Player, nil);
+    local sword = newSword(Player);
     Player.sword = sword;
     return Player;
 end
