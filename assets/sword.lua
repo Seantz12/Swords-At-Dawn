@@ -2,8 +2,8 @@ require("assets.constants");
 
 local swordImage = love.graphics.newImage("assets/images/katana.png")
 local SWORD_SCALE_FACTOR = 0.1;
-local swordWidth = swordImage:getWidth();
-local swordHeight = swordImage:getHeight();
+local swordWidth = swordImage:getWidth() * SWORD_SCALE_FACTOR;
+local swordHeight = swordImage:getHeight() * SWORD_SCALE_FACTOR;
 
 local drawSword = function(self)
     if not self.active then
@@ -53,8 +53,8 @@ end
 
 function newSword(player)
     local sword = {
-        x = player.x + PLAYER_WIDTH + swordWidth * SWORD_SCALE_FACTOR,
-        y = player.y - swordHeight * SWORD_SCALE_FACTOR * 0.5,
+        x = player.x + PLAYER_WIDTH + swordWidth,
+        y = player.y - swordHeight * 0.5,
         draw = drawSword,
         attack = swordAttack,
         active = false, -- being active means it can hurt
