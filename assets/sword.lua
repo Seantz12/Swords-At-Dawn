@@ -17,29 +17,39 @@ local drawSword = function(self)
             0,
             0
         );
+        -- DEBUG HITBOX --
+        love.graphics.setColor(0.5, 0.5, 0.5);
+        love.graphics.rectangle("fill", self.x, self.y, 10, 10);
+        resetColor();
     else
         love.graphics.draw(
             swordImage,
             self.x,
-            self.y + 20,
+            self.y + 30,
             math.rad(125), -- rotation
             SWORD_SCALE_FACTOR,
             SWORD_SCALE_FACTOR,
             0,
             0
         );
+        -- DEBUG HITBOX --
+        love.graphics.setColor(0.5, 0.5, 0.5);
+        love.graphics.rectangle("fill", self.x, self.y+30, 10, 10);
+        resetColor();
     end
 end
 
 local swordAttack = function(self)
     self.active = true;
-    if (self.x + swordWidth) > self.opponent.x and
-       (self.x + swordWidth) < (self.opponent.x + self.opponent.width) and
-       (self.y + swordHeight) > self.opponent.y and
-       (self.y + swordHeight) < (self.opponent.y + self.opponent.height) then
-        print("hello i hit");
-    else
-        print("i missed");
+    if not self.opponent == nil then
+        if self.x > self.opponent.x and
+        self.x < (self.opponent.x + self.opponent.width) and
+        (self.y + 30) > self.opponent.y and
+        (self.y + 30) < (self.opponent.y + self.opponent.height) then
+            print("hello i hit");
+        else
+            print("i missed");
+        end
     end
 end
 
