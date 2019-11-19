@@ -17,8 +17,8 @@ local test_dummy = {
 
 function love.load()
     love.graphics.setBackgroundColor(1, 153/255, 0);
-    p1 = newPlayer();
-    p2 = newPlayer();
+    p1 = newPlayer('left');
+    p2 = newPlayer('right');
     p1.attackHighButton = 'r';
     p1.left = 'a';
     p1.right = 'd';

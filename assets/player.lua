@@ -44,9 +44,15 @@ local playerAttachSwordOpponent = function(self, opponent)
     self.sword:attachOpponent(opponent)
 end
 
-function newPlayer()
+function newPlayer(side)
+    local x = 0;
+    if side == 'left' then
+        x = 30;
+    else
+        x = WINDOW_WIDTH - 30*2;
+    end
     local Player = {
-        x = 30,
+        x = x,
         y = WINDOW_HEIGHT-150,
         draw = playerDraw,
         move = playerMove,
@@ -56,7 +62,8 @@ function newPlayer()
         activeAttack = playerActiveAttack,
         inactiveAttack = playerInactiveAttack,
         attachSwordOpponent = playerAttachSwordOpponent,
-        reset = playerReset
+        reset = playerReset,
+        side = side
     };
     local sword = newSword(Player);
     Player.sword = sword;
