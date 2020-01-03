@@ -1,9 +1,10 @@
 require("assets.background");
 require("assets.constants");
-require("assets.player")
+require("assets.player");
 
 local p1;
 local p2;
+local gameActive = true;
 
 local test_dummy = {
     x = WINDOW_WIDTH-30,
@@ -51,9 +52,20 @@ function handlePlayerInput(player)
     end
 end
 
+function checkPlayerDead(player)
+    if player.alive == false then
+        print("game over bucko");
+        gameActive = false;
+    end
+end
+
 function love.update(dt)
-    handlePlayerInput(p1);
-    handlePlayerInput(p2);
+    if gameActive then
+        checkPlayerDead(p1);
+        checkPlayerDead(p2);
+        handlePlayerInput(p1);
+        handlePlayerInput(p2);
+    end
 end
 
 function love.draw()

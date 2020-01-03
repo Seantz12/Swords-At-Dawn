@@ -2,16 +2,18 @@ require("assets.constants");
 require("assets.sword");
 
 local playerDraw = function(self)
-    love.graphics.setColor(0, 0, 0);
-    love.graphics.rectangle(
-        "fill", 
-        self.x, 
-        self.y, 
-        PLAYER_WIDTH, 
-        PLAYER_HEIGHT
-    );
-    resetColor();
-    self.sword:draw();
+    if self.alive == true then
+        love.graphics.setColor(0, 0, 0);
+        love.graphics.rectangle(
+            "fill", 
+            self.x, 
+            self.y, 
+            PLAYER_WIDTH, 
+            PLAYER_HEIGHT
+        );
+        resetColor();
+        self.sword:draw();
+    end
 end
 
 local playerMove = function(self, direction)
@@ -44,6 +46,10 @@ local playerAttachSwordOpponent = function(self, opponent)
     self.sword:attachOpponent(opponent)
 end
 
+local playerDie = function(self)
+    self.alive = false
+end
+
 function newPlayer(side)
     local x = 0;
     if side == 'left' then
@@ -59,9 +65,11 @@ function newPlayer(side)
         attacking = false,
         attack = playerAttack,
         attackStartTime = 0,
+        alive = true,
         activeAttack = playerActiveAttack,
         inactiveAttack = playerInactiveAttack,
         attachSwordOpponent = playerAttachSwordOpponent,
+        die = playerDie,
         reset = playerReset,
         side = side
     };
