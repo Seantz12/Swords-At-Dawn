@@ -11,8 +11,8 @@ local drawSword = function(self)
             swordImage,
             self.x,
             self.y,
-            math.rad(90), -- rotation
-            SWORD_SCALE_FACTOR,
+            0, --math.rad(90), -- rotation
+            SWORD_SCALE_FACTOR * self.flip,
             SWORD_SCALE_FACTOR,
             0,
             0
@@ -26,8 +26,8 @@ local drawSword = function(self)
             swordImage,
             self.x,
             self.y + 30,
-            math.rad(125), -- rotation
-            SWORD_SCALE_FACTOR,
+            0, -- math.rad(125), -- rotation
+            SWORD_SCALE_FACTOR * self.flip,
             SWORD_SCALE_FACTOR,
             0,
             0
@@ -41,11 +41,11 @@ end
 
 local swordAttack = function(self)
     self.active = true;
-    if not self.opponent == nil then
+    if self.opponent ~= nil then
         if self.x > self.opponent.x and
-        self.x < (self.opponent.x + self.opponent.width) and
+        self.x < (self.opponent.x + PLAYER_WIDTH) and
         (self.y + 30) > self.opponent.y and
-        (self.y + 30) < (self.opponent.y + self.opponent.height) then
+        (self.y + 30) < (self.opponent.y + PLAYER_HEIGHT) then
             print("hello i hit");
         else
             print("i missed");
@@ -62,14 +62,21 @@ local swordAttachOpponent = function(self, opponent)
 end
 
 function newSword(player)
+    local flip = 1
+    local x = player.x - swordWidth
+    if player.side == "left"  then
+        flip = -1
+        x = player.x + PLAYER_WIDTH + swordWidth
+    end
     local sword = {
-        x = player.x + PLAYER_WIDTH + swordWidth,
+        x = x,
         y = player.y - swordHeight * 0.5,
         draw = drawSword,
         attack = swordAttack,
         active = false, -- being active means it can hurt
         attachOpponent = swordAttachOpponent,
-        reset = swordReset
+        reset = swordReset,
+        flip = flip
     };
     return sword;
 end
